@@ -50,6 +50,59 @@ diamonds_filter%>%
 diamonds_filter%>%
   count(color)
 
+
+diamonds_filter%>%
+  count(clarity)
+
+
+diamonds_filter%>%
+  ggplot(mapping = aes(
+    x = carat,
+    y = price
+  )) +
+  
+  geom_point()+
+  
+  labs(title = "Plot of Price against Carat of Diamonds")
+
+
+diamonds_filter%>%
+  ggplot(mapping = aes(
+    x = length_mm,
+    y = depth_pct
+  )) +
+  
+  geom_point()+
+  
+  labs(title = "Plot of Length (mm) against Depth (%)")
+
+
+
+
+diamonds_filter%>%
+  ggplot(mapping = aes(
+    x = width_mm,
+    y = depth_pct
+  )) +
+  
+  geom_point()+
+  
+  labs(title = "Plot of Width (mm) against Depth (%)")
+
+
+
+
+diamonds_filter%>%
+  ggplot(mapping = aes(
+    x = depth_mm,
+    y = depth_pct
+  )) +
+  
+  geom_point()+
+  
+  labs(title = "Plot of Depth (mm) against Depth (%)")
+
+
 ```
 
 
@@ -57,26 +110,35 @@ diamonds_filter%>%
 
 ```{r}
 
-diamonds <- diamonds %>%
+diamonds_filter <- diamonds_filter %>%
   mutate(table_mm = table_pct * width_mm / 100)
 
-# Overall table_mm arithmetic mean?
+# Overall table_mm arithmetic mean
 
 
-
+diamonds_filter%>%
+  summarise(
+    table_mean = mean(table_mm)
+  )
 
 
 
 # table_mm arithmetic mean within each clarity category
 
 
-
+diamonds_filter%>%
+  group_by(clarity)%>%
+  summarise(
+    mean(table_mm)
+  )
 
 
 
 ```
 
-_Add your comment here_
+_We can see that as the clarity of a diamond increases, the mean table length decreases._
+
+
 
 ## Exercise 3
 
