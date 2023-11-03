@@ -25,12 +25,30 @@ diamonds <- diamonds %>% rename(
 
 
 ## Exercise 1
-
 ```{r}
-# Do some preliminary investigations & cleaning
 
 
+diamonds_filter <- diamonds%>%
+  filter(length_mm > 0,
+         width_mm > 0,
+         depth_mm > 0)
 
+print(diamonds_filter)
+
+diamonds_filter%>%
+  summarise(
+    mean_carat = mean(carat),
+    mean_price = mean(price),
+    mean_length = mean(length_mm),
+    mean_width = mean(width_mm),
+    mean_depth = mean(depth_mm)
+  )
+
+diamonds_filter%>%
+  count(cut)
+
+diamonds_filter%>%
+  count(color)
 
 ```
 
